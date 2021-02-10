@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OXO</title>
+  <style>
+    body {
+    position:relative;
+    background-color: black;
+    left:100px;
+    }
+
+    .demir {
+        position: absolute;
+      width: 100%;
+      top:0px;
+      max-width: 300px;
+      left: 200px;
+      z-index: 3;
+
+
+    }
+      .container {
+      position: absolute;
+      width: 100%;
+      top:280px;
+      max-width: 500px;
+      left: 100px;
+      z-index:2
+    }
+     .container .btn1 {
+      position: absolute;
+      top: 26px;
+      left: 80px;
+      height:50px;
+      width:100px;
+      background-color: Transparent;
+      color: white;
+      font-size: 50px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+      display: inline-block;
+    }
+      .container .btn2 {
+      position: absolute;
+      top: 26px;
+      left: 200px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn3 {
+        position: absolute;
+      top: 26px;
+      left: 320px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn4 {
+        position: absolute;
+      top: 80px;
+      left: 80px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn5 {
+        position: absolute;
+      top: 80px;
+      left: 200px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn6 {
+        position: absolute;
+      top: 80px;
+      left: 320px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn7 {
+        position: absolute;
+      top: 134px;
+      left: 80px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn8 {
+        position: absolute;
+      top: 134px;
+      left: 200px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn9 {
+        position: absolute;
+      top: 134px;
+      left: 320px;
+      background-color:transparent;
+      color: white;
+      font-size: 50px;
+      height:50px;
+      width:100px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn10 {
+        position: absolute;
+      top: 280px;
+      left: 100px;
+      background-color:transparent;
+      color: rgb(0, 0, 0);
+      font-size: 30px;
+      font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+      height:100px;
+      width:300px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .btn11 {
+        position: absolute;
+      top: 200px;
+      left: 100px;
+      background-color:transparent;
+      color: rgb(0, 0, 0);
+      font-size: 30px;
+      font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+      height:100px;
+      width:300px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .container .scoreboard {
+      position: absolute;
+      top: 200px;
+      left: 100px;
+      background-color:red;
+      color: rgb(248, 0, 0);
+      font-size: 30px;
+      font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+      height:100px;
+      width:300px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .top-left {
+    position: absolute;
+    top: 280px;
+    left: 10px;
+    width: 100px;
+    color:white;
+    font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+    text-align: center;
+    z-index: 5;
+    }
+    .winner {
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    font-size:20px;
+    color:white;
+    font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+    text-align: center;
+    z-index: 10;
+    }
+     </style>
+  
+  <script>
+      var currentBoard = ["","","","","","","","",""];
+      var winner = 0;
+      const scores = {
+      user: 0,
+      comp: 0,
+      draw: 0
+      }
+      var turn=1
+    
+      function change1(buttonnumber) {    
+        var btn = document.getElementById("button"+buttonnumber);
+    
+        if (btn.innerHTML==='X'|| btn.innerHTML==='O'|| winner !=0){
+            console.log("already taken")}
+            else {
+           btn.innerHTML = 'X';
+           currentBoard[buttonnumber-1] ='X';
+            turn++;
+          
+          winCondition(currentBoard)
+          
+          if (winner==1){
+            document.getElementById("winner").innerHTML='Tebrikler Kahraman oldunuz';
+          }
+          aimove(currentBoard)
+        }   
+       // console.log(currentBoard)
+      }
+
+      function aimove(currentBoard) {
+        var takenpieces= 0;
+                for (i=0;i<9;i++) {
+                    if (currentBoard[i]==='X' || currentBoard[i]==='O'){
+                     takenpieces++
+                    }
+                }
+                var currentCorner=[currentBoard[0],currentBoard[2],currentBoard[6],currentBoard[8]];
+                var emptyCorner=0;
+                var virtualBoard2=currentBoard;
+                
+                for (i=0;i<4;i++){
+                    if (currentCorner[i]==''){
+                        emptyCorner++
+                    }
+                }
+                console.log(currentCorner);
+                console.log(emptyCorner);
+        var winnerMove=-1;
+        var virtualBoard=currentBoard;
+        for (i=0;i<9;i++) {
+            virtualBoard=currentBoard;
+            if (virtualBoard[i]==''){
+                virtualBoard[i]='O';
+                //console.log(virtualBoard);
+                winCondition(virtualBoard);
+                if (winner==2){
+                    winnerMove=i;
+                }
+              virtualBoard[i]='';
+            
+            }
+            winner=0;
+
+          }
+        console.log(winnerMove);
+        console.log(currentBoard);
+        var blockerMove = -1;
+            for (i=0;i<9;i++) {
+                virtualBoard=currentBoard;
+                  if (virtualBoard[i]==''){
+                      virtualBoard[i]='X';
+                     // console.log(virtualBoard);
+                      winCondition(virtualBoard);
+                        if (winner==1){
+                           blockerMove=i;
+                        }
+                      virtualBoard[i]='';
+                  }
+                winner=0;
+
+              }
+              var forkMoveCount= 0;
+              var forkMove=-1;
+              for (i=0;i<9;i++) {
+                virtualBoard=currentBoard;
+                forkMoveCount=0
+                  if (virtualBoard[i]==''){
+                      virtualBoard[i]='O';
+                      
+                      for(k=0;k<9;k++){
+                        
+                        if(virtualBoard[k]==''){
+                            virtualBoard[k]='O';
+                            winCondition(virtualBoard);
+                              if(winner==1){
+                                forkMoveCount++
+                              }
+                            virtualBoard[k]='';
+                              winner=0;
+                        }
+                      }
+                      if(forkMoveCount>1){
+                        forkMove=i;
+                      }
+                      virtualBoard[i]='';
+                  }
+                winner=0;
+
+              }
+        var blockForkMoveCount= 0;
+        var blockForkMove=-1;
+              for (i=0;i<9;i++) {
+                virtualBoard=currentBoard;
+                blockForkMoveCount=0
+                  if (virtualBoard[i]==''){
+                      virtualBoard[i]='X';
+                      
+                      for(k=0;k<9;k++){
+                        
+                        if(virtualBoard[k]==''){
+                            virtualBoard[k]='X';
+                            winCondition(virtualBoard);
+                              if(winner==1){
+                                blockForkMoveCount++
+                              }
+                            virtualBoard[k]='';
+                              winner=0;
+                        }
+                      }
+                      if(blockForkMoveCount>1){
+                        blockForkMove=i;
+                      }
+                      virtualBoard[i]='';
+                  }
+                winner=0;
+
+              }
+              
+        
+         winCondition(currentBoard);
+       
+        if (takenpieces>8 || winner !=0){
+            console.log('Game Over')
+        }
+        else if (turn==2 && currentBoard[4]==='' ){
+            currentBoard[4]='O';
+
+            turn++;
+            var aiBtn = document.getElementById("button"+5);
+            aiBtn.innerHTML='O'
+
+        }
+        else if(turn==2){
+            currentBoard[0]='O';
+            turn++;
+            var aiBtn = document.getElementById("button"+1);
+            aiBtn.innerHTML='O'
+        }
+        else if(turn==4&& currentBoard[4]=='X'&& currentBoard[8]=='X'){
+            currentBoard[2]='O';
+            turn++;
+            var aiBtn = document.getElementById("button"+3);
+            aiBtn.innerHTML='O'
+        }
+        else if( winnerMove!=-1 ){
+          currentBoard[winnerMove]='O'
+
+            turn++;
+            var aiBtn = document.getElementById("button"+(winnerMove+1));
+            aiBtn.innerHTML='O'
+
+        }
+        else if(blockerMove!=-1){
+          currentBoard[blockerMove]='O'
+
+            turn++;
+            var aiBtn = document.getElementById("button"+(blockerMove+1));
+            aiBtn.innerHTML='O'
+        }
+        
+
+        else if(JSON.stringify(currentCorner)===JSON.stringify(['X','','','X'])
+              ||JSON.stringify(currentCorner)===JSON.stringify(['','X','X',''])) {
+                if(takenpieces<4){
+                  currentBoard[1]='O'
+               
+        
+        var aiBtn = document.getElementById("button"+(2));
+            aiBtn.innerHTML='O'
+            turn++;
+                }
+        }
+        else if(forkMove!=-1){
+          currentBoard[forkMove]='O'
+
+            turn++;
+            var aiBtn = document.getElementById("button"+(forkMove+1));
+            aiBtn.innerHTML='O'
+        }
+               
+
+                
+        
+        
+        else if(blockForkMove!=-1){
+          currentBoard[blockForkMove]='O'
+
+            turn++;
+            var aiBtn = document.getElementById("button"+(blockForkMove+1));
+            aiBtn.innerHTML='O'
+        }
+        /*else if (emptyCorner>0){
+                if(emptyCorner==1){
+                  if(currentCorner[0]==''){
+                    currentBoard[0]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(1));
+                    aiBtn.innerHTML='O'
+                  }
+                  if(currentCorner[2]==''){
+                    currentBoard[2]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(3));
+                    aiBtn.innerHTML='O'
+                  }
+                  if(currentCorner[6]==''){
+                    currentBoard[6]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(7));
+                    aiBtn.innerHTML='O'
+                  }
+                  if(currentCorner[8]==''){
+                    currentBoard[8]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(9));
+                    aiBtn.innerHTML='O'
+                  }
+                 }
+                 if(emptyCorner==2){
+                   
+                  if(currentCorner[0]==''){
+                    currentBoard[0]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(1));
+                    aiBtn.innerHTML='O'
+                  }
+                  else if(currentCorner[2]==''){
+                    currentBoard[2]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(3));
+                    aiBtn.innerHTML='O'
+                  }
+                  else if(currentCorner[6]==''){
+                    currentBoard[6]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(7));
+                    aiBtn.innerHTML='O'
+                  }
+                  else if(currentCorner[8]==''){
+                    currentBoard[8]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(9));
+                    aiBtn.innerHTML='O'
+                  }
+                 }
+                 if(emptyCorner==3){
+                  if(currentCorner[8]=='X'||currentCorner[8]=='O'){
+                    currentBoard[0]='O'
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(1));
+                    aiBtn.innerHTML='O'
+                  }
+                  else if(currentCorner[6]=='X'||currentCorner[6]=='O'){
+                    currentBoard[2]='O';
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(3));
+                    aiBtn.innerHTML='O'
+                  }
+                  else if(currentCorner[2]=='X'||currentCorner[2]=='O'){
+                    currentBoard[6]='O';
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(7));
+                    aiBtn.innerHTML='O'
+                  }
+                  else if(currentCorner[0]=='O'||currentCorner[0]=='X'){
+                    currentBoard[8]='O';
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(9));
+                    aiBtn.innerHTML='O'
+                  }
+                 }
+                 if(emptyCorner==4){
+                    currentBoard[0]='O';
+                    turn++;
+                    var aiBtn = document.getElementById("button"+(1));
+                    aiBtn.innerHTML='O'
+                  
+                }
+              
+        }
+        */
+        else {
+        var relativeMove =Math.floor(Math.random()*(9-takenpieces));
+        var emptyButton =[]
+        var count = 0
+            for (i=0;i<9;i++){
+                if (currentBoard[i]===''){
+                    emptyButton[count]=i;
+                    count++;
+                }
+            }
+        console.log(emptyButton);
+        var realMove=emptyButton[relativeMove]
+
+        
+       
+        currentBoard[realMove]='O';
+        var aiBtn = document.getElementById("button"+(realMove+1));
+            aiBtn.innerHTML='O'
+            turn++;
+        }
+        winCondition(currentBoard)
+        if (winner==2){
+            document.getElementById("winner").innerHTML='Adam Kazandı';
+          }
+
+    }
+        
+    function winCondition(currentBoard){
+        if(currentBoard[0]+currentBoard[1]+currentBoard[2]=='XXX'||
+           currentBoard[3]+currentBoard[4]+currentBoard[5]=='XXX'||
+           currentBoard[6]+currentBoard[7]+currentBoard[8]=='XXX'||
+           currentBoard[0]+currentBoard[3]+currentBoard[6]=='XXX'||
+           currentBoard[1]+currentBoard[4]+currentBoard[7]=='XXX'||
+           currentBoard[2]+currentBoard[5]+currentBoard[8]=='XXX'||
+           currentBoard[0]+currentBoard[4]+currentBoard[8]=='XXX'||
+           currentBoard[2]+currentBoard[4]+currentBoard[6]=='XXX'){
+            winner =1
+            } 
+                if (currentBoard[0]+currentBoard[1]+currentBoard[2]=='OOO'||
+                    currentBoard[3]+currentBoard[4]+currentBoard[5]=='OOO'||
+                    currentBoard[6]+currentBoard[7]+currentBoard[8]=='OOO'||
+                    currentBoard[0]+currentBoard[3]+currentBoard[6]=='OOO'||
+                    currentBoard[1]+currentBoard[4]+currentBoard[7]=='OOO'||
+                    currentBoard[2]+currentBoard[5]+currentBoard[8]=='OOO'||
+                    currentBoard[0]+currentBoard[4]+currentBoard[8]=='OOO'||
+                    currentBoard[2]+currentBoard[4]+currentBoard[6]=='OOO'){
+                       winner = 2
+                       
+                       //scoreDiv.innerHTML = `User ${scores.user} - ${scores.comp} Computer`
+                            console.log('Robot oğlum bu Robot')
+                  }
+    }
+
+            function refresh(i){
+                currentBoard = ["","","","","","","","",""];
+                if(winner==1){
+                  scores.user++
+                }
+                if(winner==2){
+                  scores.comp++
+                }
+                if(winner==0){
+                  scores.draw++
+                }
+                winner =0;
+                turn=1
+                document.getElementById("scoreboard").innerHTML=`Challenger ${scores.user} - ${scores.comp} Demircan`;
+                
+                for (i=1;i<10;i++){
+                    document.getElementById("button"+i).innerHTML='';
+                    document.getElementById("winner").innerHTML='Good Luck';
+
+                }
+            }
+
+  
+                
+  </script>
+</head>
+
+<body>
+    <img  class="demir" src="https://celebi.me/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F16963e0f-99d5-46e2-9def-064e32bf3b01%2F0.jpeg?table=block&id=c8e58789-1a50-46a6-813d-46558cf95dc2&width=250&userId=&cache=v2" alt="">
+    <div id="scoreboard" class="top-left">Challenger 0 - 0 Demircan</div>
+    <div id = "winner"class="winner">Good Luck</div>
+    <div class="container">
+      
+        <img src=https://i.imgur.com/pxxGmIO.jpg width="500" height="388">
+        <button id ="button1" class="btn1" onclick="change1(1)"></button>
+        <button id ="button2" class="btn2" onclick="change1(2)"></button>
+        <button id ="button3" class="btn3" onclick="change1(3)"></button>
+        <button id ="button4" class="btn4" onclick="change1(4)"></button>
+        <button id ="button5" class="btn5" onclick="change1(5)"></button>
+        <button id ="button6" class="btn6" onclick="change1(6)"></button>
+        <button id ="button7" class="btn7" onclick="change1(7)"></button>
+        <button id ="button8" class="btn8" onclick="change1(8)"></button>
+        <button id ="button9" class="btn9" onclick="change1(9)"></button>
+        <button id ="button10" class="btn10" onclick="refresh(1)">Yeniden Başla</button>
+        <button id ="button11" class="btn11" onclick="refresh(1);turn=2;aimove(currentBoard)">Go Second</button>
+    </div>
+</body>
+</html>
